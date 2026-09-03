@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EventSphere Scanner</string>
+    <string name="available_slots">%d Slots Available</string>
+</resources>
