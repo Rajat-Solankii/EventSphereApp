@@ -31,7 +31,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         observeUiState()
 
         binding.btnStartScanning.setOnClickListener {
-            // Navigation to ScannerFragment will be added to nav_graph
             val action = DashboardFragmentDirections.actionDashboardFragmentToScannerFragment(args.eventId)
             findNavController().navigate(action)
         }
@@ -39,6 +38,20 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         binding.btnRetry.setOnClickListener {
             viewModel.loadData(args.eventId)
         }
+
+        setupCardClickListeners()
+    }
+
+    private fun setupCardClickListeners() {
+        binding.cardTotal.setOnClickListener { navigateToTicketList("ALL") }
+        binding.cardInside.setOnClickListener { navigateToTicketList("INSIDE") }
+        binding.cardOutside.setOnClickListener { navigateToTicketList("OUTSIDE") }
+        binding.cardPending.setOnClickListener { navigateToTicketList("PENDING") }
+    }
+
+    private fun navigateToTicketList(filterStatus: String) {
+        val action = DashboardFragmentDirections.actionDashboardFragmentToTicketListFragment(args.eventId, filterStatus)
+        findNavController().navigate(action)
     }
 
     private fun observeUiState() {

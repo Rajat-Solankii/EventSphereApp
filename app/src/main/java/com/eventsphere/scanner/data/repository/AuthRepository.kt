@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class AuthRepository(private val preferencesManager: PreferencesManager) {
     
-    private val api = RetrofitClient.apiService
+    private val api = RetrofitClient.getApi(preferencesManager)
 
     suspend fun login(email: String, password: String): Result<LoginResponse> = withContext(Dispatchers.IO) {
         try {

@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class EventRepository {
     
-    private val api = RetrofitClient.apiService
+    private val api get() = RetrofitClient.apiService
 
     suspend fun getEvents(): Result<List<Event>> = withContext(Dispatchers.IO) {
         try {

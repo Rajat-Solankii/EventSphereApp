@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_ticketListFragment"
+            app:destination="@id/ticketListFragment" />
     </fragment>
 
     <fragment
@@ -83,6 +86,19 @@
         tools:layout="@layout/fragment_scanner">
         <argument
             android:name="eventId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ticketListFragment"
+        android:name="com.eventsphere.scanner.ui.tickets.TicketListFragment"
+        android:label="Tickets"
+        tools:layout="@layout/fragment_ticket_list">
+        <argument
+            android:name="eventId"
+            app:argType="string" />
+        <argument
+            android:name="filterStatus"
             app:argType="string" />
     </fragment>
 

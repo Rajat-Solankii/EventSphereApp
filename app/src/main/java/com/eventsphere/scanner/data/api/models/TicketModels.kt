@@ -5,9 +5,11 @@ import com.google.gson.annotations.SerializedName
 data class Ticket(
     @SerializedName("id") val id: String,
     @SerializedName("event") val event: EventBasic,
-    @SerializedName("tier") val tier: String,
-    @SerializedName("attendeeName") val attendeeName: String,
-    @SerializedName("status") val status: String
+    @SerializedName("tier_name") val tier: String?,
+    @SerializedName("attendee_name") val attendeeName: String?,
+    @SerializedName("attendee_email") val attendeeEmail: String?,
+    @SerializedName("status") val status: String,
+    @SerializedName("payment_screenshot") val paymentScreenshot: String?
 )
 
 data class TicketInfo(

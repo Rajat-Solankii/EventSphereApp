@@ -15,32 +15,48 @@ class ScannerViewModel(private val repository: TicketRepository = TicketReposito
 
     private val _isScanning = MutableLiveData<Boolean>(false)
     val isScanning: LiveData<Boolean> = _isScanning
+    
+    var pendingExitTicketId: String? = null
 
     fun scan(ticketId: String, eventId: String) {
         if (_isScanning.value == true) return
         
         viewModelScope.launch {
             _isScanning.value = true
-            // Implementation of "fetch ticket info first" logic could go here if needed,
-            // but the repo.scanTicket already handles the scan endpoint.
-            // Requirement: "Ensure the scanning logic handles the PENDING and DECLINED statuses 
-            // before calling the scan endpoint if possible (by fetching ticket info first as per spec)."
             
-            val ticketInfoResult = repository.getTicket(ticketId)
-            ticketInfoResult.onSuccess { ticket ->
-                if (ticket.status == "PENDING" || ticket.status == "DECLINED") {
-                     _scanResult.value = Result.failure(Exception("Ticket status is ${ticket.status}"))
-                     _isScanning.value = false
-                     return@launch
-                }
-                
-                // If not pending/declined, proceed to scan
-                val result = repository.scanTicket(ticketId, eventId)
+            val result = repository.scanTicket(ticketId, eventId)
+            result.onSuccess {
                 _scanResult.value = result
-                _isScanning.value = false
-            }.onFailure {
-                _scanResult.value = Result.failure(it)
-                _isScanning.value = false
+            }.onFailure { error ->
+                _scanResult.value = Result.success(
+                    ScanResult(success = false, message = error.message ?: "Invalid Ticket or Not Found", attendee = null, ticketInfo = null)
+                )
+            }
+        }
+    }
+    
+    fun markTemporaryExit(ticketId: String, base64Image: String) {
+        viewModelScope.launch {
+            val result = repository.markTemporaryExit(ticketId, base64Image)
+            result.onSuccess {
+                _scanResult.value = result
+            }.onFailure { error ->
+                _scanResult.value = Result.success(
+                    ScanResult(success = false, message = error.message ?: "Failed to mark temporary exit", attendee = null, ticketInfo = null)
+                )
+            }
+        }
+    }
+
+    fun markReEntry(ticketId: String) {
+        viewModelScope.launch {
+            val result = repository.markReEntry(ticketId)
+            result.onSuccess {
+                _scanResult.value = result
+            }.onFailure { error ->
+                _scanResult.value = Result.success(
+                    ScanResult(success = false, message = error.message ?: "Failed to process re-entry", attendee = null, ticketInfo = null)
+                )
             }
         }
     }
