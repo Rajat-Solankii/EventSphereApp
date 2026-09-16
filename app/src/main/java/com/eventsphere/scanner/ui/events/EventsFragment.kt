@@ -32,6 +32,11 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
         binding.btnRetry.setOnClickListener {
             viewModel.fetchEvents()
         }
+
+        binding.btnQuickScan.setOnClickListener {
+            val action = EventsFragmentDirections.actionEventsFragmentToScannerFragment("")
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupToolbar() {

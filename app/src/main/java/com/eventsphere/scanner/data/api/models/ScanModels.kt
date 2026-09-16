@@ -11,7 +11,8 @@ data class ScanResult(
     @SerializedName("message") val message: String,
     @SerializedName("status") val status: String? = null,
     @SerializedName("attendee") val attendee: AttendeeBasic? = null,
-    @SerializedName("ticketInfo") val ticketInfo: TicketInfo? = null
+    @SerializedName("ticketInfo") val ticketInfo: TicketInfo? = null,
+    @SerializedName("event") val event: EventBasic? = null
 )
 
 data class AttendeeBasic(

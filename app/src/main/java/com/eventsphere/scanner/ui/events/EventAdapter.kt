@@ -1,6 +1,7 @@
 package com.eventsphere.scanner.ui.events
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.eventsphere.scanner.R
 import com.eventsphere.scanner.data.api.models.Event
 import com.eventsphere.scanner.databinding.ItemEventBinding
+
+import com.eventsphere.scanner.utils.DateUtils
 
 class EventAdapter(private val onEventClick: (Event) -> Unit) :
     ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffCallback()) {
@@ -27,11 +30,37 @@ class EventAdapter(private val onEventClick: (Event) -> Unit) :
 
         fun bind(event: Event) {
             binding.tvEventTitle.text = event.title
-            binding.tvEventDate.text = event.date
+            binding.tvEventDate.text = DateUtils.formatEventDate(event.date)
             binding.tvEventVenue.text = event.venue
             
-            val totalAvailable = event.tiers?.sumOf { it.available } ?: 0
-            binding.tvAvailableSlots.text = binding.root.context.getString(R.string.available_slots, totalAvailable)
+            // Hidden unsold slots
+            binding.tvAvailableSlots.visibility = View.GONE
+
+            // Event Status logic based on entry times
+            val eventTime = DateUtils.getEventTimeMillis(event.date)
+            if (eventTime > 0L) {
+                binding.tvEventStatusBadge.visibility = View.VISIBLE
+                val currentTime = System.currentTimeMillis()
+                val threeHoursInMillis = 3 * 60 * 60 * 1000L
+                val eventDurationInMillis = 4 * 60 * 60 * 1000L
+                
+                when {
+                    currentTime < eventTime - threeHoursInMillis -> {
+                        binding.tvEventStatusBadge.text = "UPCOMING"
+                        binding.tvEventStatusBadge.setBackgroundColor(binding.root.context.getColor(R.color.secondary))
+                    }
+                    currentTime > eventTime + eventDurationInMillis -> {
+                        binding.tvEventStatusBadge.text = "ENDED"
+                        binding.tvEventStatusBadge.setBackgroundColor(binding.root.context.getColor(R.color.error))
+                    }
+                    else -> {
+                        binding.tvEventStatusBadge.text = "LIVE"
+                        binding.tvEventStatusBadge.setBackgroundColor(binding.root.context.getColor(R.color.success))
+                    }
+                }
+            } else {
+                binding.tvEventStatusBadge.visibility = View.GONE
+            }
 
             if (!event.imageUrl.isNullOrEmpty()) {
                 Glide.with(binding.ivEventImage)

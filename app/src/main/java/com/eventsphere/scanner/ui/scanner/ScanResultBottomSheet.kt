@@ -8,6 +8,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.eventsphere.scanner.R
 import com.eventsphere.scanner.data.api.models.ScanResult
 import com.eventsphere.scanner.databinding.BottomSheetScanResultBinding
@@ -54,14 +55,38 @@ class ScanResultBottomSheet : BottomSheetDialogFragment() {
 
     private fun setupUI() {
         scanResult?.let { result ->
+            scanResult?.event?.let { eventBasic ->
+                binding.layoutEventInfo.visibility = View.VISIBLE
+                binding.dividerEventInfo.visibility = View.VISIBLE
+                binding.tvEventTitle.text = eventBasic.title
+                
+                // Set the event image if available
+                if (!eventBasic.imageUrl.isNullOrEmpty()) {
+                    Glide.with(requireContext())
+                        .load(eventBasic.imageUrl)
+                        .placeholder(R.drawable.ic_logo)
+                        .into(binding.ivEventImage)
+                } else {
+                    binding.ivEventImage.setImageResource(R.drawable.ic_logo)
+                }
+            } ?: run {
+                binding.layoutEventInfo.visibility = View.GONE
+                binding.dividerEventInfo.visibility = View.GONE
+            }
+
             val ticketId = result.attendee?.id ?: result.ticketInfo?.ticketId ?: ""
-            binding.attendeeName.text = result.attendee?.name ?: result.ticketInfo?.attendeeName ?: "Unknown Attendee"
             binding.resultMessage.text = result.message
-            
-            binding.rollNo.text = "ID: ${ticketId.ifEmpty { "N/A" }}"
-            
-            binding.attendeeEmail.text = result.attendee?.email ?: ""
-            binding.tierName.text = result.attendee?.tierName?.let { "Tier: $it" } ?: ""
+
+            if (result.attendee == null && result.ticketInfo == null) {
+                binding.cvAttendeeInfo.visibility = View.GONE
+            } else {
+                binding.cvAttendeeInfo.visibility = View.VISIBLE
+                binding.attendeeName.text = result.attendee?.name ?: result.ticketInfo?.attendeeName ?: "Unknown Attendee"
+                binding.rollNo.text = "ID: ${ticketId.ifEmpty { "N/A" }}"
+                
+                binding.attendeeEmail.text = result.attendee?.email ?: ""
+                binding.tierName.text = result.attendee?.tierName?.let { "Tier: $it" } ?: ""
+            }
             
             var hasPaymentImage = false
             var hasExitImage = false
@@ -132,7 +157,7 @@ class ScanResultBottomSheet : BottomSheetDialogFragment() {
                     binding.resultTitle.setTextColor(requireContext().getColor(R.color.warning))
                 } else {
                     binding.resultIcon.setImageResource(R.drawable.ic_error)
-                    binding.resultTitle.text = "Access Denied"
+                    binding.resultTitle.text = "Invalid Ticket"
                     binding.resultTitle.setTextColor(requireContext().getColor(R.color.error))
                 }
             } else {

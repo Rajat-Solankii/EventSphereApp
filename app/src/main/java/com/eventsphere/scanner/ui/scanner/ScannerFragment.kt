@@ -21,6 +21,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eventsphere.scanner.R
 import com.eventsphere.scanner.databinding.FragmentScannerBinding
@@ -53,6 +54,9 @@ class ScannerFragment : Fragment(R.layout.fragment_scanner) {
         }
     }
 
+    private var camera: Camera? = null
+    private var isFlashOn = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentScannerBinding.bind(view)
@@ -64,6 +68,18 @@ class ScannerFragment : Fragment(R.layout.fragment_scanner) {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
         
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.btnToggleFlash.setOnClickListener {
+            isFlashOn = !isFlashOn
+            camera?.cameraControl?.enableTorch(isFlashOn)
+            binding.btnToggleFlash.setImageResource(
+                if (isFlashOn) R.drawable.ic_flash_on else R.drawable.ic_flash_off
+            )
+        }
+
         binding.btnCancelCapture.setOnClickListener {
             resetToScanMode()
         }
@@ -121,7 +137,7 @@ class ScannerFragment : Fragment(R.layout.fragment_scanner) {
 
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
+                camera = cameraProvider.bindToLifecycle(
                     this, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageAnalyzer, imageCapture
                 )
             } catch (exc: Exception) {
@@ -149,7 +165,8 @@ class ScannerFragment : Fragment(R.layout.fragment_scanner) {
                     for (barcode in barcodes) {
                         barcode.rawValue?.let { uuid ->
                             lastScanTime = currentTime
-                            viewModel.scan(uuid, args.eventId)
+                            val eventIdParam = if (args.eventId.isEmpty()) null else args.eventId
+                            viewModel.scan(uuid, eventIdParam)
                         }
                     }
                 }
