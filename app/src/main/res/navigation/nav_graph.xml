@@ -37,6 +37,9 @@
             app:destination="@id/eventsFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -49,6 +52,9 @@
         <action
             android:id="@+id/action_eventsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_eventsFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
     </fragment>
 
     <fragment

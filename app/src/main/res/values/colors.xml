@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#4FB2C0</color>
-    <color name="secondary">#97A1DA</color>
-    <color name="background">#081317</color>
-    <color name="surface">#0D1E24</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#94A3B8</color>
-    <color name="success">#10B981</color>
-    <color name="error">#EF4444</color>
-    <color name="warning">#F59E0B</color>
+    <!-- Strictly Monochrome Base Palette -->
+    <color name="primary">#000000</color>
+    <color name="secondary">#6F6F6F</color>
+    <color name="background">#F9FAFB</color>
+    <color name="surface">#FFFFFF</color>
 
-    <!-- For backward compatibility or internal usage if needed -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="glass_bg">#B30D1E24</color> <!-- Semi-transparent surface -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#6F6F6F</color>
+
+    <!-- Semantic Colors (Only for statuses) -->
+    <color name="success">#22C55E</color>
+    <color name="error">#DC2626</color>
+    <color name="warning">#FBBF24</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="border_gray">#E5E7EB</color>
+    <color name="input_bg">#F1F5F9</color>
+    <color name="glass_bg">#99FFFFFF</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

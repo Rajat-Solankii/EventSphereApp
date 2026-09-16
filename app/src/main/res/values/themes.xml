@@ -1,35 +1,76 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.EventSphereScanner" parent="Theme.Material3.Dark.NoActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.EventSphereScanner" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/secondary</item>
-        <item name="colorOnSecondary">@color/black</item>
-
-        <!-- Background and Surface -->
+        <item name="colorOnSecondary">@color/white</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorOnSurfaceVariant">@color/text_secondary</item>
-
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Brutalist Shapes: 0dp everywhere -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.EventSphere.BottomSheetDialog</item>
     </style>
 
-    <!-- GlassCard style -->
-    <style name="Widget.EventSphereScanner.GlassCard" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardBackgroundColor">@color/glass_bg</item>
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">0dp</item>
+    <style name="ShapeAppearance.EventSphere.None" parent="ShapeAppearance.Material3.Corner.None">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
     </style>
 
-    <!-- Primary Button style -->
     <style name="Widget.EventSphereScanner.Button.Primary" parent="Widget.Material3.Button">
-        <item name="android:background">@drawable/bg_gradient_button</item>
-        <item name="backgroundTint">@null</item>
+        <item name="backgroundTint">@color/black</item>
         <item name="android:textColor">@color/white</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="android:letterSpacing">0.025</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="Widget.EventSphereScanner.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="strokeColor">@color/border_gray</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardElevation">4dp</item>
+        <!-- Glassmorphism approximation -->
+        <item name="android:backgroundTint">@color/glass_bg</item>
+    </style>
+
+    <style name="Widget.EventSphereScanner.Input" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="boxBackgroundColor">@color/input_bg</item>
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+    </style>
+
+    <style name="ThemeOverlay.EventSphere.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.EventSphere.BottomSheet</item>
+    </style>
+
+    <style name="Widget.EventSphere.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.EventSphere.None</item>
+        <item name="backgroundTint">@color/surface</item>
+    </style>
+
+    <!-- Text Appearances for Semantic matching -->
+    <style name="TextAppearance.EventSphere.Label" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="TextAppearance.EventSphere.Heading" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/text_primary</item>
     </style>
 </resources>

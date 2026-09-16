@@ -3,17 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/black">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black_overlay"
+        android:contentDescription="@string/back"
+        android:padding="12dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btnToggleFlash"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/black_overlay"
+        android:contentDescription="@string/flash"
+        android:padding="12dp"
+        android:src="@drawable/ic_flash_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
     <View
         android:id="@+id/overlay"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         android:background="@drawable/scanner_overlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +52,13 @@
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Align QR Code inside the box"
+        android:layout_marginTop="32dp"
+        android:background="@color/black_overlay"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="@string/align_qr"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.EventSphere.Label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/overlay" />
@@ -36,29 +67,30 @@
         android:id="@+id/captureControls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@color/black_overlay"
         android:gravity="center"
-        android:padding="16dp"
-        android:background="#88000000"
+        android:orientation="vertical"
+        android:padding="32dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCapturePhoto"
-            android:layout_width="200dp"
+            style="@style/Widget.EventSphereScanner.Button.Primary"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Take Photo"
-            android:backgroundTint="@color/primary"
+            android:text="@string/take_photo"
             android:textColor="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelCapture"
-            android:layout_width="200dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:text="Cancel"
-            android:backgroundTint="@color/error"
-            android:textColor="@color/white" />
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/cancel"
+            android:textColor="@color/error"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.EventSphere.None" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

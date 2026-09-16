@@ -4,111 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:padding="20dp">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:title="Profile"
-        app:titleTextColor="@color/text_primary" />
+        app:tint="@color/text_primary" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/staff_profile"
+        android:textColor="@color/text_primary"
+        android:textSize="28sp"
+        android:fontFamily="serif"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardProfile"
-        style="@style/Widget.EventSphereScanner.GlassCard"
+        style="@style/Widget.EventSphereScanner.Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="32dp">
 
-            <TextView
-                android:id="@+id/tvNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:textColor="@color/text_secondary" />
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="@string/staff_profile"
+                app:tint="@color/primary" />
 
             <TextView
                 android:id="@+id/tvUserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/text_primary"
-                tools:text="John Doe" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="16dp"
-                android:background="#20FFFFFF" />
-
-            <TextView
-                android:id="@+id/tvEmailLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:textColor="@color/text_secondary" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.EventSphere.Heading"
+                android:textSize="24sp"
+                tools:text="John Doe" />
 
             <TextView
                 android:id="@+id/tvUserEmail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textColor="@color/text_primary"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/text_secondary"
                 tools:text="john.doe@example.com" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginVertical="16dp"
-                android:background="#20FFFFFF" />
+                android:layout_marginVertical="24dp"
+                android:background="@color/border_gray" />
 
             <TextView
                 android:id="@+id/tvRoleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Role"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:text="@string/role"
+                android:textAppearance="@style/TextAppearance.EventSphere.Label"
                 android:textColor="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/tvUserRole"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textColor="@color/text_primary"
-                tools:text="Scanner" />
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                tools:text="EVENT_MANAGER" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
-        style="@style/Widget.EventSphereScanner.Button.Primary"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="56dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/sign_out"
+        android:textColor="@color/error"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.EventSphere.None"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:strokeColor="@color/error" />
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateTint="@color/primary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

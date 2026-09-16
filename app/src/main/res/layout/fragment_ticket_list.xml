@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,9 +16,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Tickets"
-            app:titleTextColor="@color/text_primary"
-            app:navigationIconTint="@color/text_primary" />
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/text_primary"
+            app:titleTextAppearance="@style/TextAppearance.EventSphere.Heading"
+            app:title="@string/event_tickets"
+            app:titleTextColor="@color/text_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -29,16 +31,17 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
             android:clipToPadding="false"
+            android:paddingVertical="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_ticket" />
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
             android:visibility="gone" />
 
         <TextView
@@ -46,7 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No tickets found"
+            android:text="@string/no_tickets_found"
+            android:textAppearance="@style/TextAppearance.EventSphere.Heading"
             android:textColor="@color/text_secondary"
             android:visibility="gone" />
     </FrameLayout>

@@ -2,71 +2,67 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.EventSphereScanner.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="4dp"
-    app:cardBackgroundColor="@color/surface"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="0dp"
-    app:strokeColor="@color/text_secondary"
-    app:strokeWidth="1dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/tvAttendeeName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.EventSphere.Heading"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/tvStatus"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="John Doe" />
+            tools:text="Rahul Sharma" />
 
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
             android:background="@drawable/bg_status_badge"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.EventSphere.Label"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAttendeeName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvAttendeeName"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAttendeeName"
-            tools:text="Inside" />
+            tools:text="INSIDE" />
 
         <TextView
             android:id="@+id/tvAttendeeEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAttendeeName"
-            tools:text="john.doe@example.com" />
+            tools:text="rahul@example.com" />
 
         <TextView
             android:id="@+id/tvTierName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAttendeeEmail"
-            tools:text="Tier: VIP" />
+            tools:text="Pass Tier: VIP" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

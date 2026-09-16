@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Minimalist Sharp Monochrome Logo -->
     <path
-        android:fillColor="#6200EE"
-        android:pathData="M100,20 L180,180 L20,180 Z" />
+        android:pathData="M20,20 L100,20 L100,100 L20,100 Z"
+        android:strokeWidth="6"
+        android:strokeColor="#000000"
+        android:fillColor="#00000000"/>
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M100,60 L140,150 L60,150 Z" />
+        android:pathData="M40,40 L80,40 L80,80 L40,80 Z"
+        android:fillColor="#000000"/>
+    <path
+        android:pathData="M55,55 L65,55 L65,65 L55,65 Z"
+        android:fillColor="#FFFFFF"/>
 </vector>

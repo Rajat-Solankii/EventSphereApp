@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.EventSphereScanner.GlassCard"
+    style="@style/Widget.EventSphereScanner.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
@@ -11,74 +11,94 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivEventImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
-            tools:src="@tools:sample/backgrounds/scenic" />
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/tvEventTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:textColor="@color/text_primary"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivEventImage"
-            app:layout_constraintTop_toTopOf="@id/ivEventImage"
-            tools:text="Tech Conference 2026" />
+            android:textAppearance="@style/TextAppearance.EventSphere.Heading"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/ivChevron"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TechFest 2026" />
 
         <TextView
             android:id="@+id/tvEventDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/text_secondary"
             app:drawableStartCompat="@drawable/ic_calendar_month"
-            android:drawablePadding="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:drawableTint="@color/text_secondary"
+            app:layout_constraintEnd_toStartOf="@id/ivChevron"
             app:layout_constraintStart_toStartOf="@id/tvEventTitle"
             app:layout_constraintTop_toBottomOf="@id/tvEventTitle"
-            tools:text="Oct 15, 2026" />
+            tools:text="Oct 15, 2026 • 09:00 AM" />
 
         <TextView
             android:id="@+id/tvEventVenue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/text_secondary"
             app:drawableStartCompat="@drawable/ic_location_on"
-            android:drawablePadding="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:drawableTint="@color/text_secondary"
+            app:layout_constraintEnd_toStartOf="@id/ivChevron"
             app:layout_constraintStart_toStartOf="@id/tvEventTitle"
             app:layout_constraintTop_toBottomOf="@id/tvEventDate"
-            tools:text="Convention Center, NY" />
+            tools:text="Main Auditorium, Block A" />
+
+        <ImageView
+            android:id="@+id/ivEventImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvAvailableSlots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/bg_slot_tag"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="2dp"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            android:textColor="@color/primary"
-            app:layout_constraintStart_toStartOf="@id/tvEventTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvEventVenue"
-            tools:text="50 Slots Available" />
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEventStatusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_status_badge"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.EventSphere.Label"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="LIVE" />
+
+        <ImageView
+            android:id="@+id/ivChevron"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/select"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEventStatusBadge"
+            app:tint="@color/text_primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
