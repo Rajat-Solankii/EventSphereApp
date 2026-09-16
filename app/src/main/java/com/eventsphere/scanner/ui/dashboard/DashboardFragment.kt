@@ -30,6 +30,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
         observeUiState()
 
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.btnStartScanning.setOnClickListener {
             val action = DashboardFragmentDirections.actionDashboardFragmentToScannerFragment(args.eventId)
             findNavController().navigate(action)

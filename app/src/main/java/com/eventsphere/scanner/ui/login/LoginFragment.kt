@@ -46,6 +46,10 @@ class LoginFragment : Fragment() {
             val password = binding.etPassword.text.toString()
             viewModel.login(email, password)
         }
+
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_settingsFragment)
+        }
     }
 
     private fun observeUiState() {
