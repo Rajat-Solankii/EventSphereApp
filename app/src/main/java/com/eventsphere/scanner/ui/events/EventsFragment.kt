@@ -40,14 +40,8 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
     }
 
     private fun setupToolbar() {
-        binding.toolbar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.action_profile -> {
-                    findNavController().navigate(R.id.action_eventsFragment_to_profileFragment)
-                    true
-                }
-                else -> false
-            }
+        binding.btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_eventsFragment_to_profileFragment)
         }
     }
 

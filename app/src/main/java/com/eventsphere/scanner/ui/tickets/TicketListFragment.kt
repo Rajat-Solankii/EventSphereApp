@@ -77,8 +77,8 @@ class TicketListFragment : Fragment(R.layout.fragment_ticket_list) {
             "TEMPORARY_OUT" -> "Temporarily Out"
             else -> "Tickets"
         }
-        binding.toolbar.title = title
-        binding.toolbar.setNavigationOnClickListener {
+        binding.tvHeaderTitle.text = title
+        binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
     }
