@@ -105,13 +105,32 @@
                     android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
-                style="@style/Widget.EventSphereScanner.Button.Primary"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/sign_in" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    style="@style/Widget.EventSphereScanner.Button.Primary"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="56dp"
+                    android:text="@string/sign_in" />
+
+                <ImageButton
+                    android:id="@+id/btnBiometric"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_gradient_button"
+                    android:contentDescription="@string/sign_in"
+                    android:src="@drawable/ic_fingerprint"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progress_bar"
