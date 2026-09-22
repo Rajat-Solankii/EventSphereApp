@@ -17,7 +17,7 @@ class PreferencesManager(context: Context) {
         private const val KEY_USER_ROLE = "user_role"
         private const val KEY_ORG_ID = "org_id"
 
-        private const val DEFAULT_BASE_URL = "http://192.168.1.100:3000"
+        private const val DEFAULT_BASE_URL = "https://d1w3s3368l68qp.cloudfront.net"
     }
 
     var baseUrl: String

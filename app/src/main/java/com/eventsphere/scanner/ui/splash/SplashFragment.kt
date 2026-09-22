@@ -41,20 +41,13 @@ class SplashFragment : Fragment() {
         val baseUrl = preferencesManager.baseUrl
         val token = preferencesManager.accessToken
 
-        // If baseUrl is default or not set, go to settings
-        // Assuming DEFAULT_BASE_URL is "http://192.168.1.100:3000" and we want to ensure user configures it if needed
-        // But the prompt says "If baseUrl is not set". 
-        // I'll check if it's empty or the default placeholder that indicates it needs setup.
-        // Actually, let's just check if it's specifically set by the user. 
-        // For now, I'll assume if it's the default and the user wants to configure it.
-        // Or I can just check if it's empty.
-        
-        if (baseUrl.isEmpty() || baseUrl == "http://192.168.1.100:3000") {
+        if (baseUrl.isEmpty()) {
             // navigate to Settings
             findNavController().navigate(R.id.action_splashFragment_to_settingsFragment)
         } else if (token != null) {
-            // navigate to Events
-            findNavController().navigate(R.id.action_splashFragment_to_eventsFragment)
+            // navigate to Login to show Biometric or use token
+            // we will let login fragment handle biometric auto-login
+            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
         } else {
             // navigate to Login
             findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
