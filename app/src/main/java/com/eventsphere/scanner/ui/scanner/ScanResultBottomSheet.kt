@@ -8,6 +8,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.eventsphere.scanner.R
 import com.eventsphere.scanner.data.api.models.ScanResult
@@ -53,6 +54,53 @@ class ScanResultBottomSheet : BottomSheetDialogFragment() {
         dialog.show()
     }
 
+    private fun showFullScreenImageUrl(url: String) {
+        val dialog = Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        val imageView = ZoomableImageView(requireContext()).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            setOnClickListener { dialog.dismiss() }
+        }
+        Glide.with(requireContext()).load(url).into(imageView)
+        dialog.setContentView(imageView)
+        dialog.show()
+    }
+
+    private fun handleImageLoading(imageStr: String?, container: View, imageView: ImageView): Boolean {
+        if (imageStr.isNullOrEmpty()) {
+            container.visibility = View.GONE
+            return false
+        }
+
+        container.visibility = View.VISIBLE
+        if (imageStr.startsWith("http")) {
+            Glide.with(requireContext())
+                .load(imageStr)
+                .placeholder(R.drawable.ic_logo)
+                .into(imageView)
+            imageView.setOnClickListener { showFullScreenImageUrl(imageStr) }
+            return true
+        } else {
+            try {
+                val base64Image = if (imageStr.startsWith("data:image")) {
+                    imageStr.substringAfter(",")
+                } else {
+                    imageStr
+                }
+                val decodedString = Base64.decode(base64Image, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                imageView.setImageBitmap(bitmap)
+                imageView.setOnClickListener { showFullScreenImage(bitmap) }
+                return true
+            } catch (e: Exception) {
+                container.visibility = View.GONE
+                return false
+            }
+        }
+    }
+
     private fun setupUI() {
         scanResult?.let { result ->
             scanResult?.event?.let { eventBasic ->
@@ -92,38 +140,10 @@ class ScanResultBottomSheet : BottomSheetDialogFragment() {
             var hasExitImage = false
 
             val paymentImageStr = result.attendee?.paymentScreenshot
-            if (!paymentImageStr.isNullOrEmpty() && paymentImageStr.startsWith("data:image")) {
-                try {
-                    val base64Image = paymentImageStr.substringAfter(",")
-                    val decodedString = Base64.decode(base64Image, Base64.DEFAULT)
-                    val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                    binding.paymentImage.setImageBitmap(bitmap)
-                    binding.paymentImage.visibility = View.VISIBLE
-                    hasPaymentImage = true
-                    binding.paymentImage.setOnClickListener { showFullScreenImage(bitmap) }
-                } catch (e: Exception) {
-                    binding.paymentImage.visibility = View.GONE
-                }
-            } else {
-                binding.paymentImage.visibility = View.GONE
-            }
+            hasPaymentImage = handleImageLoading(paymentImageStr, binding.paymentImageContainer, binding.paymentImage)
 
             val exitImageStr = result.attendee?.exitImage
-            if (!exitImageStr.isNullOrEmpty() && exitImageStr.startsWith("data:image")) {
-                try {
-                    val base64Image = exitImageStr.substringAfter(",")
-                    val decodedString = Base64.decode(base64Image, Base64.DEFAULT)
-                    val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                    binding.exitImage.setImageBitmap(bitmap)
-                    binding.exitImage.visibility = View.VISIBLE
-                    hasExitImage = true
-                    binding.exitImage.setOnClickListener { showFullScreenImage(bitmap) }
-                } catch (e: Exception) {
-                    binding.exitImage.visibility = View.GONE
-                }
-            } else {
-                binding.exitImage.visibility = View.GONE
-            }
+            hasExitImage = handleImageLoading(exitImageStr, binding.exitImageContainer, binding.exitImage)
 
             if (hasPaymentImage || hasExitImage) {
                 binding.imagesContainer.visibility = View.VISIBLE

@@ -156,29 +156,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:gravity="center"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/paymentImage"
+        <LinearLayout
+            android:id="@+id/paymentImageContainer"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
+            android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/exitImage"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Proof of Payment"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textColor="@color/text_secondary" />
+
+            <ImageView
+                android:id="@+id/paymentImage"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exitImageContainer"
             android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:layout_marginStart="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Exit Verification"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textColor="@color/text_secondary" />
+
+            <ImageView
+                android:id="@+id/exitImage"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
 
     </LinearLayout>
 
